@@ -278,6 +278,29 @@ class _SettingsTabState extends State<SettingsTab> {
               BrandDivider(),
               GestureDetector(
                 onTap: () {
+                  //TODO: This Page Leads to Change Payment
+                },
+                child: ListTile(
+                  subtitle: Text(
+                    'VISA 0097',
+                    style: TextStyle(
+                      fontSize: 20,
+                      color: Colors.purple[900],
+                    ),
+                  ),
+                  title: Text(
+                    'Payment Method',
+                    style: TextStyle(color: Colors.black54, fontSize: 13),
+                  ),
+                  trailing: Icon(
+                    Icons.arrow_forward_ios_sharp,
+                    color: Colors.black54,
+                  ),
+                ),
+              ),
+              BrandDivider(),
+              GestureDetector(
+                onTap: () {
                   Navigator.push(
                       context,
                       MaterialPageRoute(

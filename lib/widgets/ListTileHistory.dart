@@ -30,7 +30,7 @@ class ListTileHistory extends StatelessWidget {
             ),
             trailing: (status != 'canceled')
                 ? Text(
-                    '${status.toUpperCase()}'.split(' ')[0],
+                    '${status.toUpperCase()}',
                     style: TextStyle(
                       color: Colors.green,
                       fontFamily: 'Ubunty-Bold',
@@ -39,7 +39,7 @@ class ListTileHistory extends StatelessWidget {
                     ),
                   )
                 : Text(
-                    '${status.toUpperCase()}'.split(' ')[0],
+                    '${status.toUpperCase()}',
                     style: TextStyle(
                         color: Colors.deepOrangeAccent[700],
                         fontSize: 16,

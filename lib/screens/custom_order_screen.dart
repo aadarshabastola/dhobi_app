@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dhobi_app/global_variables.dart';
+import 'package:dhobi_app/screens/order_confirmation_screen.dart';
 import 'package:dhobi_app/widgets/BrandDivider.dart';
 import 'package:dhobi_app/widgets/largeButton.dart';
-import 'package:dhobi_app/widgets/ourDialog.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -278,30 +278,35 @@ class _CustomOrderScreenState extends State<CustomOrderScreen> {
                       title: 'PLACE ORDER',
                       color: Colors.purple[900],
                       onPressed: () {
-                        if (selectedDeliveryDate.isBefore(
-                            selectedPickupDate.add(Duration(days: 1)))) {
-                          showSnackBar('Invalid Date Range');
-                          return;
-                        }
-                        showDialog(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return OurDialog(
-                              title:
-                                  'Your Order Will Be Picked Up At: ${DateFormat('EEEE, MMMM d').format(selectedPickupDate)} \n\n And Delivered At \n${DateFormat('EEEE, MMMM d').format(selectedPickupDate.add((selectedPickupDate.weekday != 5) ? Duration(days: 1) : Duration(days: 2)))}',
-                              buttonText: 'Place Order',
-                              onTapped: () {
-                                if (selectedDeliveryDate.isBefore(
-                                    selectedPickupDate
-                                        .add(Duration(days: 1)))) {
-                                  showSnackBar('Invalid Date Range');
-                                }
-                                createLaundryRequest();
-                                Navigator.pop(context);
-                              },
-                            );
-                          },
-                        );
+                        // if (selectedDeliveryDate.isBefore(
+                        //     selectedPickupDate.add(Duration(days: 1)))) {
+                        //   showSnackBar('Invalid Date Range');
+                        //   return;
+                        // }
+                        // showDialog(
+                        //   context: context,
+                        //   builder: (BuildContext context) {
+                        //     return OurDialog(
+                        //       title:
+                        //           'Your Order Will Be Picked Up At: ${DateFormat('EEEE, MMMM d').format(selectedPickupDate)} \n\n And Delivered At \n${DateFormat('EEEE, MMMM d').format(selectedPickupDate.add((selectedPickupDate.weekday != 5) ? Duration(days: 1) : Duration(days: 2)))}',
+                        //       buttonText: 'Place Order',
+                        //       onTapped: () {
+                        //         if (selectedDeliveryDate.isBefore(
+                        //             selectedPickupDate
+                        //                 .add(Duration(days: 1)))) {
+                        //           showSnackBar('Invalid Date Range');
+                        //         }
+                        //         createLaundryRequest();
+                        //         Navigator.pop(context);
+                        //       },
+                        //     );
+                        //   },
+                        // );
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    OrderConfirmationScreen()));
                       }),
                 ],
               )),

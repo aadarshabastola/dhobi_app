@@ -14,6 +14,9 @@ class _HistoryTabState extends State<HistoryTab> {
   Query laundryRef = FirebaseFirestore.instance
       .collection('laundryRequest')
       .where("userId", isEqualTo: currentUserInfo.id);
+  // .where("pickupDate", whereIn: [todayDate.toString()]);
+
+  String dropdownText = 'All';
 
   @override
   Widget build(BuildContext context) {
@@ -22,8 +25,41 @@ class _HistoryTabState extends State<HistoryTab> {
         elevation: 1,
         shadowColor: Colors.black45,
         backgroundColor: Colors.white,
+        automaticallyImplyLeading: false,
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 16.0),
+            child: DropdownButtonHideUnderline(
+              child: DropdownButton(
+                hint: Text(dropdownText),
+                items: <String>['All', 'Today'].map((String value) {
+                  return DropdownMenuItem<String>(
+                    value: value,
+                    child: new Text(value),
+                  );
+                }).toList(),
+                onChanged: (_value) {
+                  setState(() {
+                    dropdownText = _value;
+                    if (_value == 'All') {
+                      laundryRef = FirebaseFirestore.instance
+                          .collection('laundryRequest')
+                          .where("userId", isEqualTo: currentUserInfo.id);
+                    }
+                    if (_value == 'Today') {
+                      laundryRef = FirebaseFirestore.instance
+                          .collection('laundryRequest')
+                          .where("userId", isEqualTo: currentUserInfo.id)
+                          .where("pickupDate", whereIn: [todayDate.toString()]);
+                    }
+                  });
+                },
+              ),
+            ),
+          ),
+        ],
         title: Text(
-          'Order History',
+          'Orders History',
           style: TextStyle(fontSize: 20, color: Colors.purple[900]),
         ),
       ),
@@ -31,8 +67,7 @@ class _HistoryTabState extends State<HistoryTab> {
         padding: EdgeInsets.symmetric(horizontal: 16.0),
         //todo: need to refactor this code into another widget
         child: StreamBuilder(
-          stream:
-              laundryRef.orderBy("pickupDate", descending: true).snapshots(),
+          stream: laundryRef.snapshots(),
           builder: (context, snapshot) {
             if (!snapshot.hasData) {
               return Center(

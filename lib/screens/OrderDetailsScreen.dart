@@ -5,6 +5,8 @@ import 'package:dhobi_app/widgets/ourDialog.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
+import '../global_variables.dart';
+
 class OrderDetailsScreen extends StatelessWidget {
   final OrderDetails thisOrder;
   OrderDetailsScreen({this.thisOrder});
@@ -13,6 +15,9 @@ class OrderDetailsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        iconTheme: IconThemeData(
+          color: Colors.purple[900],
+        ),
         elevation: 1,
         shadowColor: Colors.black45,
         backgroundColor: Colors.white,
@@ -48,129 +53,105 @@ class OrderDetailsScreen extends StatelessWidget {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          'Order ID: ',
-                          style: TextStyle(
-                              fontSize: 18.0, color: Colors.purple[900]),
-                        ),
-                        Text(thisOrder.id,
-                            style: TextStyle(
-                                fontSize: 18.0, color: Colors.grey[900])),
+                        Text('Order ID: ', style: kOrderDetailsTitle),
+                        Text(thisOrder.id, style: kOrderDetails),
                       ],
                     ),
-                    SizedBox(height: 25),
+                    SizedBox(height: 15),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
                           'Order Status: ',
-                          style: TextStyle(
-                              fontSize: 18.0, color: Colors.purple[900]),
+                          style: kOrderDetailsTitle,
                         ),
                         Text('${thisOrder.status.toUpperCase()}',
-                            style: TextStyle(
-                                fontSize: 18.0, color: Colors.grey[900])),
+                            style: kOrderDetails),
                       ],
                     ),
-                    SizedBox(height: 25),
+                    SizedBox(height: 15),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
                           'Order Placed At: ',
-                          style: TextStyle(
-                              fontSize: 18.0, color: Colors.purple[900]),
+                          style: kOrderDetailsTitle,
                         ),
                         Text(
                             '${DateFormat('EEEE, MMMM d, y, h:m:s a').format(DateTime.parse(thisOrder.createdAt))}',
-                            style: TextStyle(
-                                fontSize: 18.0, color: Colors.grey[900])),
+                            style: kOrderDetails),
                       ],
                     ),
-                    SizedBox(height: 25),
+                    SizedBox(height: 15),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
                           'Order For: ',
-                          style: TextStyle(
-                              fontSize: 18.0, color: Colors.purple[900]),
+                          style: kOrderDetailsTitle,
                         ),
-                        Text('${thisOrder.userFullName}',
-                            style: TextStyle(
-                                fontSize: 18.0, color: Colors.grey[900])),
+                        Text('${thisOrder.userFullName}', style: kOrderDetails),
                       ],
                     ),
-                    SizedBox(height: 25),
+                    SizedBox(height: 15),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
                           'Contact Number: ',
-                          style: TextStyle(
-                              fontSize: 18.0, color: Colors.purple[900]),
+                          style: kOrderDetailsTitle,
                         ),
-                        Text('${thisOrder.userPhone}',
-                            style: TextStyle(
-                                fontSize: 18.0, color: Colors.grey[900])),
+                        Text('${thisOrder.userPhone}', style: kOrderDetails),
                       ],
                     ),
-                    SizedBox(height: 25),
+                    SizedBox(height: 15),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
                           'Pickup Date: ',
-                          style: TextStyle(
-                              fontSize: 18.0, color: Colors.purple[900]),
+                          style: kOrderDetailsTitle,
                         ),
                         Text(
                             '${DateFormat('EEEE, MMMM d, y').format(DateTime.parse(thisOrder.pickupDate))}',
-                            style: TextStyle(
-                                fontSize: 18.0, color: Colors.grey[900])),
+                            style: kOrderDetails),
                       ],
                     ),
-                    SizedBox(height: 25),
+                    SizedBox(height: 15),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
                           'Delivery Date: ',
-                          style: TextStyle(
-                              fontSize: 18.0, color: Colors.purple[900]),
+                          style: kOrderDetailsTitle,
                         ),
                         Text(
                             '${DateFormat('EEEE, MMMM d, y').format(DateTime.parse(thisOrder.deliveryDate))}',
-                            style: TextStyle(
-                                fontSize: 18.0, color: Colors.grey[900])),
+                            style: kOrderDetails),
                       ],
                     ),
-                    SizedBox(height: 25),
+                    SizedBox(height: 15),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
                           'Pickup Address: ',
-                          style: TextStyle(
-                              fontSize: 18.0, color: Colors.purple[900]),
+                          style: kOrderDetailsTitle,
                         ),
                         Text('${thisOrder.userAddress}, ${thisOrder.userCity}',
-                            style: TextStyle(
-                                fontSize: 18.0, color: Colors.grey[900])),
+                            style: kOrderDetails),
                       ],
                     ),
-                    SizedBox(height: 25),
+                    SizedBox(height: 15),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
                           'Payment Method: ',
-                          style: TextStyle(
-                              fontSize: 18.0, color: Colors.purple[900]),
+                          style: kOrderDetailsTitle,
                         ),
                         Text('${thisOrder.paymentMethod}'.split(' ')[0],
-                            style: TextStyle(
-                                fontSize: 18.0, color: Colors.grey[900])),
+                            style: kOrderDetails),
                       ],
                     ),
                   ],
@@ -180,14 +161,36 @@ class OrderDetailsScreen extends StatelessWidget {
               ExpansionTile(
                 title: Text(
                   'Order Instruction: ',
-                  style: TextStyle(fontSize: 18.0, color: Colors.purple[900]),
+                  style: kOrderDetailsTitle,
                 ),
+                expandedAlignment: Alignment.centerLeft,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(
+                        left: 16.0, right: 16.0, bottom: 10.0),
+                    child: Text(
+                      thisOrder.instruction,
+                      style: TextStyle(fontSize: 18.0, color: Colors.grey[900]),
+                    ),
+                  )
+                ],
               ),
               ExpansionTile(
                 title: Text(
                   'Driver Instruction: ',
-                  style: TextStyle(fontSize: 18.0, color: Colors.purple[900]),
+                  style: kOrderDetailsTitle,
                 ),
+                expandedAlignment: Alignment.centerLeft,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(
+                        left: 16.0, right: 16.0, bottom: 10.0),
+                    child: Text(
+                      thisOrder.driverInstruction,
+                      style: TextStyle(fontSize: 18.0, color: Colors.grey[900]),
+                    ),
+                  )
+                ],
               ),
               SizedBox(height: 10),
               Padding(

@@ -75,7 +75,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
       Navigator.push(
           context,
           MaterialPageRoute(
-              builder: (context) => AddAddress(editingAddress: false)));
+              builder: (context) => AddAddress(editingAddress: true)));
     }
   }
 
